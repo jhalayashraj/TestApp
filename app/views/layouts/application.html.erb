@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TestApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    '/assets/bootstrap.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  </head>
+
+  <body>
+    <%= render 'layouts/header' %>
+
+  	<div class="container">
+      <div id="flash_messages">
+      <%= render 'layouts/flash_messages' %>
+    </div>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

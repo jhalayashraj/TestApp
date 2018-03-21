@@ -1,0 +1,27 @@
+<!-- <p>
+  <strong>User:</strong>
+  <%#= @profile.user %>
+</p> -->
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @profile.date_of_birth %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
+
+<p>
+  <strong>About me:</strong>
+  <%= @profile.about_me.html_safe %>
+</p>
+
+<p>
+  <strong>Hobbies:</strong>
+  <%= @profile.hobbies %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

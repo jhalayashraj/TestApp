@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  date_of_birth: 2018-03-29
+  gender: false
+  about_me: MyText
+  hobbies: MyText
+
+two:
+  user: two
+  date_of_birth: 2018-03-29
+  gender: false
+  about_me: MyText
+  hobbies: MyText

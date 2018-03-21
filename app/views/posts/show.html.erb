@@ -1,0 +1,58 @@
+<h1>Showing Post</h1>
+<p>
+  <strong>Content:</strong>
+  <%= @post.content.html_safe %>
+</p>
+
+<!-- <h1>Comments</h1> -->
+<h2><%= @post.comments.count %> Comments</h2>
+
+<div class='commentform'>
+	<%= render "comments/form", comment: @comment %>
+</div>
+<br>
+<table class="table table-bordered tr-list">
+  <thead>
+    <tr>
+      <th>Like</th>
+      <th>Content</th>
+      <th>User Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'comments/comment_data', collection: @comments, as: :comment %>
+  </tbody>
+</table>
+
+<!-- <div id="comments">
+	<h2><%= @post.comments.count %> Comments</h2>
+
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Content</th>
+	      <th>User Name</th>
+	      <th colspan="2"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+		<%# @comments.each do |comment| %>
+	      <tr>
+	        <td><%#= comment.content %></td>
+	        <td><%#= comment.user.user_name %></td>
+	        <td><%#= link_to 'Show', post_comment_path %></td>
+	        <td><%#= link_to 'Edit', edit_post_comment_path(comment) %></td>
+	        <td><%#= link_to 'Destroy', post_comment_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <%# end %>
+	  </tbody>
+	</table>
+
+	<h3>Add a comment:</h3>
+	<%#= render "comments/form" %>
+</div>
+<br> -->
+<%= link_to 'Back', posts_path, class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Back" } %>

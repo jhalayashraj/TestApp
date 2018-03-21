@@ -1,0 +1,3 @@
+$('#new_post<%= @post.id %> .name').text("<%= @post.content %>");
+$('.myform').empty().append("<%= j render partial: 'form', locals: { post: @post_new } %>");
+validation();

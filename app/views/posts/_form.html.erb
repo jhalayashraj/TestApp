@@ -1,0 +1,57 @@
+<%= nested_form_for post, remote: true, html: { id: 'post-form' } do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :post_content, class: 'form-control required', placeholder: 'Enter the Post' %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <br>
+
+      <%= form.fields_for :comments do |ff| %>
+        <div class="box">
+          <div class="col-xs-6 col-md-11">
+            <%= ff.text_field :content, class: 'form-control', placeholder: 'Enter the Comment' %>
+            <%= ff.hidden_field :user_id, value: current_user.id %>
+          </div>
+          <div class="col-md-1">
+            <%= ff.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+          </div>
+          <%= ff.fields_for :reviews do |fff| %>
+            <div class="clearfix">
+              <div class="col-xs-6 col-md-11 box2">
+                <%= fff.text_field :content, class: 'form-control', placeholder: 'Enter the Review' %>
+                <%= fff.hidden_field :user_id, value: current_user.id %>
+              </div>
+              <div class="col-md-1">
+                <%= fff.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+              </div>
+            </div>
+          <% end %>
+          <div class="clearfix">
+          </div>
+          <div class="review1">
+            <%= ff.link_to_add "Add a Review", :reviews, class: 'btn btn-primary btn-sm' %>
+          </div>
+          <div class="clearfix">
+          </div>
+        </div>
+      <% end %>
+
+      <span>
+        <%= form.link_to_add "Add a Comment", :comments, class: 'btn btn-primary' %>
+      </span>
+
+      <div class="pull-right">
+        <%= form.button class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating..."} %>
+      </div>
+<% end %>

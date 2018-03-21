@@ -1,0 +1,28 @@
+<% likes = post.get_likes(current_user.id) %>
+<tr id="<%= "new_post#{post.id}" %>">
+	<td>
+		<span class="pull-left">
+			<%= link_to likes_path(likeable_id: post.id, likeable_type: 'Post'), method: 'post', remote: true do %>
+				<% if likes.present? %>
+					<% if likes.first.liked.eql?(true) %>
+						<i class="fa fa-thumbs-up icon_<%= post.id%> "></i>
+					<% else %>
+						<i class="fa fa-thumbs-down icon_<%= post.id%> "></i>
+					<% end %>
+				<% else %>
+					<i class="fa fa-thumbs-o-up icon_<%= post.id%> "></i>
+				<% end %>
+				<span id="count_<%= post.id %>"><%= post.likes.where(liked: true).size %></span>
+			<% end %>
+		</span>
+	</td>
+	<!-- <td>
+		<%# if current_user.profile.avatar? %>
+			<%#= image_tag current_user.profile.avatar.url(:thumb), class: 'img-thumbnail' %>
+		<%# end %>
+	</td> -->
+	<td width="70%" class='ellipsis name'><%= truncate(post.content, length: 120, escape: false) %></td>
+	<td width="15%"><%= link_to 'Show Comments', post, class: 'btn btn btn-success btn-sm', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Showing..."} %></td>
+	<td width="10%"><%= link_to 'Edit', edit_post_path(post), class: 'btn btn-default btn-sm', remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Editing..."} %></td>
+	<td width="10%"><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?', disable_with: "<i class='fa fa-spinner fa-spin'></i> Destroying..." }, remote: true, class: 'btn btn-default btn-sm btn-danger new_post#{post.id}' %></td>
+</tr>

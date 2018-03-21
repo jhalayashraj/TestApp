@@ -1,0 +1,40 @@
+<%= nested_form_for([@post], remote: true, html: { id: 'comment-form' }) do |form| %>
+
+  <!-- <div class="field">
+    <%#= form.label :content %>
+    <%#= form.hidden_field :user_id, value: current_user.id %>
+    <%#= form.text_area :content, id: :comment_content, class: 'form-control required' %>
+  </div>
+  <br>
+  <%#= form.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+  <div class="action">
+    <%#= form.button class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating..."} %>
+  </div>
+
+  <%#= form.fields_for :reviews do |f| %>
+    <%#= f.text_field :content, class: 'form-control', placeholder: 'Enter the Review' %>
+    <%#= f.hidden_field :user_id, value: current_user.id %>
+    <%#= f.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+  <%# end %>
+  <%#= form.link_to_add "Add a Review", :reviews, class: 'btn btn-primary btn-sm' %>
+<%# end %> -->
+
+  <%= form.fields_for :comments do |ff| %>
+    <%= ff.text_field :content, class: 'form-control', placeholder: 'Enter the Comment' %>
+    <%= ff.hidden_field :user_id, value: current_user.id %>
+    <%= ff.hidden_field :post_id, value: @post.id %>
+    <%= ff.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+      
+      <%= ff.fields_for :reviews do |fff| %>
+        <%= fff.text_field :content, class: 'form-control', placeholder: 'Enter the Review' %>
+        <%= fff.hidden_field :user_id, value: current_user.id %>
+        <%= fff.link_to_remove '<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>'.html_safe %>
+      <% end %>
+      <%= ff.link_to_add "Add a Review", :reviews, class: 'btn btn-primary btn-sm' %>
+      <%= ff.button class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating..."} %>
+  <% end %>
+  <%= form.link_to_add "Add a Comment", :comments, class: 'btn btn-primary' %>
+<% end %>
+<script>
+	validation();
+</script>

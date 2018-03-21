@@ -1,0 +1,26 @@
+<h1>Posts</h1>
+
+<div class='myform'>
+	<%= render 'form', post: @post %>
+</div>
+
+<table class="table table-bordered tr-list">
+  <br>
+  <thead>
+    <tr>
+      <th>Like</th>
+      <!-- <th>Profile Picture</th> -->
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'posts/post_data', collection: @posts, as: :post %>
+  </tbody>
+</table>
+<br>
+
+<script>
+  validation();
+</script>

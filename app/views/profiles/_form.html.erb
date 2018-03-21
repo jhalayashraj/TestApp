@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for profile, class: 'form-horizontal' do |form| %>
+      <% if profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+          <ul>
+          <% profile.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @profile.avatar? %>
+        <span class="avatar">
+          <center><%= image_tag @profile.avatar.url(:medium), class: 'img-thumbnail' %></center>
+        </span>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.file_field :avatar, class: 'form-control' %>
+      </div>
+
+      <%= form.fields_for :user do |f| %>
+        <div class="form-group">
+          <%= f.label :first_name, "First Name" %><br>
+          <%= f.text_field :first_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name, "Last Name" %><br>
+          <%= f.text_field :last_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :user_name, "User Name" %><br />
+          <%= f.text_field :user_name, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :date_of_birth %>
+        <%= form.text_field :date_of_birth, 'data-behaviour' => 'datepicker', id: :profile_date_of_birth, class: 'form-control' %>
+      </div>
+
+      <script type="text/javascript">
+        $('[data-behaviour~=datepicker]').datepicker();
+      </script>
+
+      <div class="form-group">
+        <%= form.label :gender %>
+        <%= form.radio_button :gender, true %> <%= form.label :gender, "Female" %>
+        <%= form.radio_button :gender, false %> <%= form.label :gender, "Male" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :about_me %>
+        <%= form.text_area :about_me, id: :profile_about_me, rows: 5, cols: 25, :class => "tinymce" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :hobbies %>
+        <%#= form.text_area :hobbies, id: :profile_hobbies, class: 'form-control' %>
+        <%= form.text_field :hobbies, 'data-role'=>'tagsinput' %>
+      </div>
+
+      <script type="text/javascript">
+        $('[data-role~=tagsinput]').tagsinput();
+      </script>
+
+      <div class="form-group">
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.submit class: 'btn btn-primary' %>
+        <%= link_to 'Back', posts_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= tinymce %>

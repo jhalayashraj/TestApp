@@ -1,0 +1,7 @@
+<% if @like.liked.eql?(true) %>
+	$('.icon_<%= params[:likeable_id]%>').removeClass('fa-thumbs-down fa-thumbs-o-up').addClass('fa-thumbs-up')
+<% else %>
+	$('.icon_<%= params[:likeable_id]%>').removeClass('fa-thumbs-up').addClass('fa-thumbs-down')
+<% end %>
+$('#count_<%= params[:likeable_id] %>').html('<%= @count.size %>');
+$('#flash_messages').html('<%= j(render "layouts/flash_messages") %>');

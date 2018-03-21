@@ -1,0 +1,26 @@
+<% likes = comment.get_likes(current_user.id) %>
+<tr id="<%= "new_comment#{comment.id}" %>">
+	<% if comment.persisted? %>
+	<td>
+		<span class="pull-left">
+			<%= link_to likes_path(likeable_id: comment.id, likeable_type: 'Comment'), method: 'post', remote: true do %>
+				<% if likes.present? %>
+					<% if likes.first.liked.eql?(true) %>
+						<i class="fa fa-thumbs-up icon_<%= comment.id%> "></i>
+					<% else %>
+						<i class="fa fa-thumbs-down icon_<%= comment.id%> "></i>
+					<% end %>
+				<% else %>
+					<i class="fa fa-thumbs-o-up icon_<%= comment.id%> "></i>
+				<% end %>
+				<span id="count_<%= comment.id %>"><%= comment.likes.where(liked: true).size %></span>
+			<% end %>
+		</span>
+	</td>
+	<td><%= comment.content.html_safe %></td>
+	<td><%= comment.user.user_name %></td>
+	<!-- <td width="10%"><%#= link_to 'Show', post_comment_path(post_id: comment.post_id, id: comment.id), class: 'btn btn-default btn-sm' %></td> -->
+	<td width="10%"><%= link_to 'Edit', edit_post_comment_path(post_id: comment.post_id, id: comment.id), class: 'btn btn-default btn-sm', remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Editing..."} %></td>
+	<td width="10%"><%= link_to 'Destroy', post_comment_path(post_id: comment.post_id, id: comment.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: "<i class='fa fa-spinner fa-spin'></i> Destroying..." }, remote: true, class: 'btn btn-default btn-sm btn-danger new_comment#{comment.id}' %></td>
+	<% end %>
+</tr>
