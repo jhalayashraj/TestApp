@@ -19,8 +19,14 @@ gem 'font-awesome-rails'
 gem 'tinymce-rails'
 gem 'paperclip'
 gem 'nested_form'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use sqlite3 for the development
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
