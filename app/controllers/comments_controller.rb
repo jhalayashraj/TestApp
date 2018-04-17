@@ -64,8 +64,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       flash[:danger] = "Comment was successfully destroyed."
-      format.html { redirect_to @comment.post }
-      format.json { head :no_content }
+      # format.html { redirect_to @comment.post }
+      # format.json { head :no_content }
+      format.js
     end
   end
 

@@ -1,3 +1,4 @@
 $('table.tr-list').append("<%= j(render partial: 'posts/post_data', locals: { post: @post }) %>");
 $('#post-form')[0].reset();
 validation();
+delete_post();

@@ -76,9 +76,10 @@ class PostsController < ApplicationController
     @post.destroy
     respond_to do |format|
       flash[:danger] = "Post was successfully destroyed."
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-      format.js   { render :layout => false }
+      # format.html { redirect_to posts_url }
+      # format.json { head :no_content }
+      # format.js   { render :layout => false }
+      format.js
     end
   end
 

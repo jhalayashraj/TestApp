@@ -22,6 +22,48 @@
 //= require jquery_nested_form
 //= require_tree .
 
+function delete_post(){
+  $('.destroy').on('click', function(){
+    if(confirm("Are you sure?")){
+      $.ajax({
+        url: '/posts/' + this.parentElement.id,
+        type: 'DELETE',
+        dataType: "script",
+        success: function(r){
+
+        }
+      });
+    }
+  });
+}
+
+function delete_comment(){
+  $('.destroy-comment').on('click', function(){
+    if(confirm("Are you sure?")){
+      $.ajax({
+        url: '/posts/' + $(this).data("post-id") + '/comments/' + $(this).data("comment-id"),
+        type: 'DELETE',
+        success: function(r){
+
+        }
+      });
+    }
+  });
+}
+
+// $(document).ready(function(){
+  // $('.create').on('click', function(){
+  //   $.ajax({
+  //     url: '/posts/' + this.parentElement.id,
+  //     type: 'POST',
+  //     data: {post[content]}
+  //     success: function(r){
+  //
+  //     }
+  //   });
+  // });
+// });
+
 $(document).ready(function () {
    $('#new_user').validate({
    	rules: {
@@ -36,6 +78,8 @@ $(document).ready(function () {
    	}
    });
    validation();
+   delete_post();
+   delete_comment();
 });
 
 function validation()
@@ -56,7 +100,7 @@ function validation()
     messages: {
       "post[content]": {
         remote: "This Post is Already Present!"
-      } 
+      }
     },
   });
   $('#comment-form').validate({

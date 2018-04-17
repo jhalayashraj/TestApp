@@ -20,8 +20,8 @@
 	<td><%= comment.content.html_safe %></td>
 	<td><%= comment.user.user_name %></td>
 	<!-- <td width="10%"><%#= link_to 'Show', post_comment_path(post_id: comment.post_id, id: comment.id), class: 'btn btn-default btn-sm' %></td> -->
-	<td width="15%"><%= link_to 'Show Reviews', reviews_path, class: 'btn btn-success btn-sm' %></td>
+	<td width="15%"><%= link_to 'Show Reviews', reviews_path(comment_id: comment.id), class: 'btn btn-success btn-sm', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Showing..."} %></td>
 	<td width="10%"><%= link_to 'Edit', edit_post_comment_path(post_id: comment.post_id, id: comment.id), class: 'btn btn-default btn-sm', remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Editing..."} %></td>
-	<td width="10%"><%= link_to 'Destroy', post_comment_path(post_id: comment.post_id, id: comment.id), method: :delete, data: { confirm: 'Are you sure?', disable_with: "<i class='fa fa-spinner fa-spin'></i> Destroying..." }, remote: true, class: 'btn btn-default btn-sm btn-danger new_comment#{comment.id}' %></td>
+	<td class=""><button class="btn btn-default btn-sm btn-danger destroy-comment" data-post-id="<%= comment.post_id %>" data-comment-id="<%= comment.id %>">Destroy</button></td>
 	<% end %>
 </tr>

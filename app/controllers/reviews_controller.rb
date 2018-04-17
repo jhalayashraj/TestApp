@@ -5,6 +5,18 @@ class ReviewsController < ApplicationController
   # GET /reviews.json
   def index
     @reviews = Review.all
+    @review = Review.new
+    if params[:comment_id].present?
+      @comment = Comment.find(params[:comment_id])
+    end
+    # if params[:comment_id].present?
+    #   @comment = Comment.find(params[:comment_id])
+    #   @reviews = @comment.reviews.all
+    #   @review = @comment.reviews.new
+    # else
+    #   @reviews = Review.all
+    #   @review = Review.new
+    # end
   end
 
   # GET /reviews/1
@@ -28,7 +40,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to reviews_path, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
