@@ -18,6 +18,7 @@ gem 'devise-bootstrap-views'
 gem 'font-awesome-rails'
 gem 'tinymce-rails'
 gem 'paperclip'
+gem 'stripe'
 gem 'nested_form'
 # Use sqlite3 for the development
 group :development, :test do
