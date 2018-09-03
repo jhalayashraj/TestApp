@@ -20,6 +20,7 @@ gem 'tinymce-rails'
 gem 'paperclip'
 gem 'stripe'
 gem 'nested_form'
+gem 'pry'
 # Use sqlite3 for the development
 group :development, :test do
   gem 'sqlite3'

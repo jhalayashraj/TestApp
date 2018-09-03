@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   	resources :comments
   end
   resources :likes
-  resources :charges
+  resources :charges, only: [:new, :create]
 
   get 'static/home'
 
