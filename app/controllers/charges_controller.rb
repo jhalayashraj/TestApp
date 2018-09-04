@@ -11,7 +11,7 @@ class ChargesController < ApplicationController
   private
 
   def charges_params
-    params.permit(:stripeEmail, :stripeToken)
+    params.permit(:stripeEmail, :stripeToken, :stripeTokenType, :authenticity_token, :utf8)
   end
 
   def catch_exception(exception)
